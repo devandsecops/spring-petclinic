@@ -16,7 +16,8 @@ pipeline {
     }
     stage('Docker Build') {
       steps {
-        sh '/usr/local/bin/docker build -t ashokshingade24/spring-petclinic:${BUILD_NUMBER} .'
+        sh '/usr/local/bin/docker build -t ashokshingade24/spring-petclinic:latest .'
+        sh '/usr/local/bin/docker image tag ashokshingade24/spring-petclinic:latest ashokshingade24/spring-petclinic:${BUILD_NUMBER}'
       }
     }
     stage('Docker Push') {
@@ -24,6 +25,7 @@ pipeline {
         withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
           sh "/usr/local/bin/docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
           sh '/usr/local/bin/docker push ashokshingade24/spring-petclinic:${BUILD_NUMBER}'
+          sh '/usr/local/bin/docker push ashokshingade24/spring-petclinic:latest'
         }
       }
     }
