@@ -10,7 +10,7 @@ pipeline {
     stage('Build') {
       steps {
         withMaven(maven : 'mvn-3.6.3') {
-          sh "mvn -f complete/pom.xml package"
+          sh "mvn package"
         }
       }
     }
