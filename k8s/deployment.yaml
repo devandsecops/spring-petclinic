@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: petclinic
-        image: ashokshingade24/spring-petclinic:3
+        image: ashokshingade24/spring-petclinic:${BUILD_NUMBER}
         ports:
         - containerPort: 8080
