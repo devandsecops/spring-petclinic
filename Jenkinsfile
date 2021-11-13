@@ -27,5 +27,11 @@ pipeline {
         }
       }
     }
+    stage('Deploy to Kubernetes') {
+      steps {
+        sh "/usr/local/bin/kubectl --kubeconfig=/Users/ashingade/.kube/config apply -f ./k8s/deployment.yaml"
+        sh "/usr/local/bin/kubectl --kubeconfig=/Users/ashingade/.kube/config apply -f ./k8s/service.yaml"
+      }	
+    }
   }
 }
